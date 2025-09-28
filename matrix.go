@@ -5,7 +5,7 @@ func GenMatrix(w int, h int, pieces []string) [][]bool {
 	matrix := make([][]bool, len(choices))
 	
 	for i := range matrix {
-		matrix[i] = make([]bool, w + w*h)
+		matrix[i] = make([]bool, len(pieces) + w*h)
 	}
 
 	for j := range choices {
