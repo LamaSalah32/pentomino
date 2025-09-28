@@ -8,7 +8,7 @@ This project implements a **Pentomino tiling puzzle solver** in Go, using Donald
 package main
 
 import (
-    "pentomino/pentomino"
+    pentomino "github.com/lamasalah32/pentomino-tiling"
 )
 
 func main() {
