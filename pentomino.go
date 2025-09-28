@@ -2,14 +2,14 @@ package pentomino
 
 var pentominoPieces = []piece{
 	{name: "I", points: []point{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}}},
-	{name: "x", points: []point{{1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}}},
+	{name: "X", points: []point{{1, 0}, {0, 1}, {1, 1}, {2, 1}, {1, 2}}},
 	{name: "T", points: []point{{0, 0}, {1, 0}, {2, 0}, {1, 1}, {1, 2}}},
 	{name: "U", points: []point{{0, 0}, {0, 1}, {1, 1}, {2, 0}, {2, 1}}},
 	{name: "V", points: []point{{0, 0}, {0, 1}, {0, 2}, {1, 2}, {2, 2}}},
 	{name: "W", points: []point{{0, 0}, {1, 0}, {1, 1}, {2, 1}, {2, 2}}},
 	{name: "Z", points: []point{{0, 0}, {1, 0}, {1, 1}, {1, 2}, {2, 2}}},
 	{name: "L", points: []point{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {1, 3}}},
-	{name: "y", points: []point{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {1, 1}}},
+	{name: "Y", points: []point{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {1, 1}}},
 	{name: "N", points: []point{{0, 0}, {0, 1}, {1, 1}, {1, 2}, {1, 3}}},
 	{name: "P", points: []point{{0, 0}, {1, 0}, {0, 1}, {1, 1}, {0, 2}}},
 	{name: "F", points: []point{{1, 0}, {0, 1}, {1, 1}, {1, 2}, {2, 2}}},
@@ -52,7 +52,7 @@ func flip(p piece) piece {
 }
 
 func pieceOrientationInfo(n string) (bool, int) {
-	if n == "I" || n == "x" {
+	if n == "I" || n == "X" {
 		return false, 2
 	}
 
@@ -127,7 +127,7 @@ func GenChoices(w, h int, pieces []string) []choices {
 					if isValidPlacement(i, j, w, h, orientations[l]) {
 						pos := make([]int, len(orientations[l].points))
 						for m := range orientations[l].points {
-							pos[m] = (orientations[l].points[m].y+j)*w + (orientations[l].points[m].x + i)
+							pos[m] = (orientations[l].points[m].y + j)*w + (orientations[l].points[m].x + i)
 						}
 
 						c = append(c, choices{N: orientations[l].name, Pos: pos})
