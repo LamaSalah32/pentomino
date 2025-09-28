@@ -1,5 +1,10 @@
 package pentomino
 
+import (
+	"fmt"
+	"math/rand"
+)
+
 type Node struct{
 	L, R *Node
 	U, D *Node
@@ -149,4 +154,56 @@ func BuildDLX(matrix [][]bool) *header {
 	}
 
 	return root
+}
+
+func print(width, height int, solutions [][]*Node) {
+	board := make([][]string, height)
+	for i := range board {
+		board[i] = make([]string, width)
+	}
+
+	i := rand.Intn(len(solutions))
+	sol := solutions[i]
+	for _, node := range sol {
+		var ch string
+		for j := node; ; j = j.R {
+			if j.C.N >= width*height {
+				ch = IndexToPieceName[j.C.N - width*height]
+				break
+			}
+
+			if j.R == node {
+				break
+			}
+		}
+		
+		for j := node; ; j = j.R {
+			if j.C.N < width*height {
+				pos := j.C.N
+				x := pos % width
+				y := pos / width
+				board[y][x] = ch
+			}
+
+			if j.R == node {
+				break
+			}
+		}
+	}
+
+	for i := range board {
+		fmt.Println(board[i])  
+	}
+}
+
+func Solve(width, height int, pieces []string) {
+	matrix := GenMatrix(width, height, pieces)
+	root := BuildDLX(matrix)
+	solutions := SolveDLX(root, 0, nil)
+
+	if len(solutions) > 0{
+		print(width, height, solutions)
+	} else {
+		println("No solutions found")
+	}
 }
